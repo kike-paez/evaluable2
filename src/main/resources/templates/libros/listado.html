@@ -7,6 +7,7 @@
 	<div class="container">
 		<h1 class="text-primary" th:text="${tituloH1}" />
 		<p th:text="'Total de libros: ' + ${cantidad}" />
+		<a th:href="@{/libros/listado}">Inicio del listado</a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -19,10 +20,12 @@
 			</thead>
 			<tbody>
 				<tr th:each="libro: ${libros}">
-					<td th:text="${libro.id}"></td>
-					<td th:text="${libro.titulo}"></td>
-					<td th:text="${libro.autor}"></td>
-					<td th:text="${libro.cantidad}"></td>
+					<td th:text="${libro.id}" />
+					<td th:text="${libro.titulo}" />
+					<td >
+						<a th:text="${libro.autor}" th:href="@{/libros/listado?autor=} + ${libro.autor}" />
+					</td>
+					<td th:text="${libro.cantidad}" />
 					<td>
 						<a class="btn btn-primary btn-xs" th:href="@{/libros/borrar/} + ${libro.id}">Borrar</a>
 						<a class="btn btn-primary btn-xs" th:href="@{/libros/form/} + ${libro.id}">Editar</a>
@@ -30,6 +33,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<nav th:replace="paginator-nav :: paginator" />
 	</div>
 </body>
 </html>

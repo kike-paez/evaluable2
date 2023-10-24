@@ -19,10 +19,10 @@
 			</thead>
 			<tbody>
 				<tr th:each="usuario: ${usuarios}">
-					<td th:text="${usuario.id}"></td>
-					<td th:text="${usuario.nombre}"></td>
-					<td th:text="${usuario.apellido}"></td>
-					<td th:text="${usuario.email}"></td>
+					<td th:text="${usuario.id}" />
+					<td th:text="${usuario.nombre}" />
+					<td th:text="${usuario.apellido}" />
+					<td th:text="${usuario.email}" />
 					<td>
 						<a class="btn btn-primary btn-xs" th:href="@{/usuarios/borrar/} + ${usuario.id}">Borrar</a>
 						<a class="btn btn-primary btn-xs" th:href="@{/usuarios/form/} + ${usuario.id}">Editar</a>
@@ -30,6 +30,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<nav th:replace="paginator-nav :: paginator" />
 	</div>
 </body>
 </html>
