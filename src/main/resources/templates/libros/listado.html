@@ -7,7 +7,6 @@
 	<div class="container">
 		<h1 class="text-primary" th:text="${tituloH1}" />
 		<p th:text="'Total de libros: ' + ${cantidad}" />
-		<a th:href="@{/libros/listado}">Inicio del listado</a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -27,13 +26,17 @@
 					</td>
 					<td th:text="${libro.cantidad}" />
 					<td>
-						<a class="btn btn-primary btn-xs" th:href="@{/libros/borrar/} + ${libro.id}">Borrar</a>
-						<a class="btn btn-primary btn-xs" th:href="@{/libros/form/} + ${libro.id}">Editar</a>
+						
+						<a class="btn btn-success btn-xs" th:href="@{/libros/form/} + ${libro.id}">Editar</a>
+						<a class="btn btn-danger btn-xs" th:href="@{/libros/borrar/} + ${libro.id}">Borrar</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<nav th:replace="paginator-nav :: paginator" />
+		<div th:if="${mostrarPaginador}">
+			<nav th:replace="paginator-nav :: paginator" />
+		</div>
+		<a th:if="${mostrarVolver}" th:href="@{/libros/listado}">Volver al listado completo</a>
 	</div>
 </body>
 </html>

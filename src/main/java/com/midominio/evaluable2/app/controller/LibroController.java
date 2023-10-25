@@ -42,8 +42,10 @@ public class LibroController {
 		
 		if (autor == null) {
 			model.addAttribute("libros", libros);
+			model.addAttribute("mostrarPaginador", true);
 		} else {
 			model.addAttribute("libros", libroService.findByAutor(autor));
+			model.addAttribute("mostrarVolver", true);
 		}
 		
 		model.addAttribute("tituloH1", "Listado de libros");
@@ -53,7 +55,7 @@ public class LibroController {
 	}
 	
 	@GetMapping("/borrar/{id}")
-	public String borraPorId(@PathVariable Long id, RedirectAttributes flash) {
+	public String borrarPorId(@PathVariable Long id, RedirectAttributes flash) {
 		if (id > 0) {
 			libroService.deleteById(id);
 		}

@@ -7,9 +7,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 @Entity
 @Table(name="libros")
+@Data
 public class Libro {
 	
 	@Id
@@ -21,35 +23,4 @@ public class Libro {
 	private String autor;
 	@NotNull
 	private int cantidad;
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getTitulo() {
-		return titulo;
-	}
-	
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	
-	public String getAutor() {
-		return autor;
-	}
-	
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
-	public int getCantidad() {
-		return cantidad;
-	}
-	
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
 }

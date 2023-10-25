@@ -8,22 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.midominio.evaluable2.app.dao.LibroRepository;
 import com.midominio.evaluable2.app.entity.Libro;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 @Service
 public class LibroService {
 	
 	@Autowired
 	private LibroRepository libroRepository;
-	
-	@PersistenceContext
-	private EntityManager em;
 	
 	public Long count() {
 		return libroRepository.count();
@@ -33,19 +26,12 @@ public class LibroService {
 		return libroRepository.findAll();
 	}
 	
-	@Transactional
 	public void deleteById(Long id) {
 		libroRepository.deleteById(id);
 	}
 	
-	@Transactional
-	public void save(Libro libro) {
-		if (libro.getId() != null && libro.getId() > 0) {
-			em.merge(libro);	// actualiza
-		} else {
-			em.persist(libro);	// inserta
-		}
-		libroRepository.save(libro);
+	public Libro save(Libro libro) {
+		return libroRepository.save(libro);
 	}
 	
 	public Optional<Libro> findById(Long id) {
@@ -63,7 +49,6 @@ public class LibroService {
 		return listaFiltrada;
 	}
 	
-	@Transactional
 	public Page<Libro> listar(Pageable pageable) {
 		return libroRepository.findAll(pageable);
 	}
